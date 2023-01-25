@@ -1,8 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const dotenv = require('dotenv').config();
 const mongoose = require('mongoose')
-
-require('dotenv').config();
 
 const app = express(); 
 const port = process.env.PORT || 5000;
@@ -18,13 +17,12 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully");
 })
 
-const homeRouter = require('./routes/home');
-const resultsRouter = require('./routes/results');
-const searchRouter = require('./routes/search');
+const resumeRouter = require('./routes/resume');
 
-app.use('/', homeRouter);
-app.use('/results', resultsRouter);
-app.use('/search', searchRouter);
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+
+app.use('/resume', resumeRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
