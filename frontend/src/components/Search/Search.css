@@ -1,0 +1,36 @@
+.Format {
+    text-align: center;
+    background-color: #282c34;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+    font-size: calc(10px + 2vmin);
+    min-height: 100vh;
+    font-family: 'Quicksand', sans-serif;
+}
+
+/* .Search {
+    display: flex;
+    flex-direction: row;
+} */
+
+.Format input {
+    margin-top: 20px;
+    width: 25%;
+    height: 20%;
+    padding-left: 10px;
+}
+
+.mb-3 {
+    width: 75%;
+}
+
+#input-group-dropdown-1 {
+    width: 25%;
+}
+
+#input-form {
+    width: 75%;
+}
