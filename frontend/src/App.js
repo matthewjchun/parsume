@@ -1,22 +1,20 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { BrowserRouter, Route } from 'react-router-dom'
+import Home from './components/Home/Home'
+import Results from './components/Results/Results'
+import Search from './components/Search/Search'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h>
-          Parsume
-        </h>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-        </a>
-      </header>
-    </div>
+    <Home></Home>
+    // <BrowserRouter>
+    //   <div>
+    //     <Route path="/" exact component={Home} />
+    //     <Route path="/Results" component={Results} />
+    //     <Route path="/Search" component={Search} />
+    //   </div>
+    // </BrowserRouter>
   );
 }
 
