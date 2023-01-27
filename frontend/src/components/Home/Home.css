@@ -37,3 +37,12 @@
     font-size: 126px;
     /* color: #245CF3; */
   }
+
+  .upload {
+    margin-bottom: 50px;
+    min-width: 50%;
+  }
+
+  .search-previous {
+    min-width: 50%;
+  }
