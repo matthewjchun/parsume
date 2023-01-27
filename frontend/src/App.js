@@ -1,22 +1,32 @@
 import './App.css';
-// import 'bootstrap/dist/css/bootstrap.min.css'
-// import { BrowserRouter, Route } from 'react-router-dom'
-import Home from './components/Home/Home'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import Home from './components/Home/Home';
 import Search from './components/Search/Search';
-// import Results from './components/Results/Results'
-// import Search from './components/Search/Search'
+import Results from './components/Results/Results';
+// import firebase from 'firebase/app';
+// import 'firebase/firestore';
+
+// require('dotenv').config();
+
+
+// import { useCollectionData } from 'react-firebase-hooks/firestore'
+
+// const app = initializeApp(process.env.FIREBASE_CONFIG)
+
+
+// const firestore = firebase.firestore();
 
 function App() {
   return (
-    // <Home></Home>
-    <Search></Search>
-    // <BrowserRouter>
-    //   <div>
-    //     <Route path="/" exact component={Home} />
-    //     <Route path="/results" component={Results} />
-    //     <Route path="/search" component={Search} />
-    //   </div>
-    // </BrowserRouter>
+    <Router>
+       <Routes>
+         <Route path="/" element={ <Home /> } />
+         <Route path="/results" element={ <Results /> } />
+         <Route path="/search" element={ <Search /> } />
+       </Routes>
+    </Router>
   );
 }
 
