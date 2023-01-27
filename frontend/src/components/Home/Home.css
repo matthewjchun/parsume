@@ -38,11 +38,17 @@
     /* color: #245CF3; */
   }
 
+  .file-upload {
+    margin-left: 25%;
+    max-width: 50%;
+    margin-bottom: 10px;
+  }
+
   .upload {
     margin-bottom: 50px;
     min-width: 50%;
   }
 
-  .search-previous {
+  .home-buttons {
     min-width: 50%;
   }
