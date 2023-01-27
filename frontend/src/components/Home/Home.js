@@ -1,20 +1,48 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { FirebaseContext } from '../../App';
 import { FilePond, registerPlugin } from 'react-filepond'
-// File, 
-
-// import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
-// import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-// import 'filepond-plugin-image-preview/dist/filepond-plugin-imsage-preview.css';
 import 'filepond/dist/filepond.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom'
 import './Home.css';
 
-// registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 function Home() {
-  const [files, setFiles] = useState([])
+  const [file, setFile] = useState(null)
+  const firebase = useContext(FirebaseContext)
 
+  console.log(firebase)
+
+  const handleFilePondChange = (fileItems) => {
+    const file = fileItems[0].file;
+    firebase.storage().ref().put(file.name);
+  }
+
+  const handleFileParse = () => {
+    if (!file) {
+      console.log('No file selected');
+      return;
+    }
+
+    const fileReader = new FileReader();
+
+    fileReader.onload = (e) => {
+      console.log("----")
+      console.log(e.target.result);
+    }
+
+    fileReader.readAsText(file);
+
+  }
+
+
+  // const handleUpload = (file) => {
+  //   const storageRef = firebase.storage().ref();
+  //   const fileRef = storageRef.child(file.name);
+  //   fileRef.put(file.file).then(() => {
+  //     console.log("File has been uploaded")
+  //   })
+  // }             onprocessfile={(error, file) => handleUpload(file)}
 
 
   return (
@@ -23,12 +51,11 @@ function Home() {
           PARSUME
         </h>
         <FilePond
-            files={files}
-            onupdatefiles={setFiles}
+            files={file}
+            onupdatefiles={setFile}
             allowMultiple={false}
             maxFiles={1}
-            server="/api"
-            name="files" /* sets the file input name, it's filepond by default */
+            name="file"
             labelIdle='Drag & Drop your Resume or <span class="filepond--label-action">Browse</span>'
         />
         <Link to='/search'>

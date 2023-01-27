@@ -1,4 +1,4 @@
-.Format {
+.search-format {
     text-align: center;
     background-color: #282c34;
     display: flex;
@@ -11,12 +11,30 @@
     font-family: 'Quicksand', sans-serif;
 }
 
-/* .Search {
+.header {
     display: flex;
     flex-direction: row;
-} */
+    justify-content: flex-start;
+    background-color: #282c34;
+    font-family: 'Quicksand', sans-serif;
+}
 
-.Format input {
+.search-logo {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 32px;
+    background-color: #282c34;
+    outline-color: #282c34;
+}
+
+.btn:focus {
+    outline: none !important;
+  }
+
+.search-format Button {
+    margin-top: 20px;
+}
+
+.search-format input {
     margin-top: 20px;
     width: 25%;
     height: 20%;
