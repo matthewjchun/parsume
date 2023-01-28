@@ -1,0 +1,59 @@
+.search-format {
+    text-align: center;
+    background-color: #282c34;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+    font-size: calc(10px + 2vmin);
+    min-height: 100vh;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: #282c34;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.search-logo {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 32px;
+    background-color: #282c34;
+    outline-color: #282c34;
+}
+
+.btn:focus {
+    outline: none !important;
+  }
+
+.search-format Button {
+    margin-top: 20px;
+}
+
+.search-format input {
+    margin-top: 20px;
+    width: 25%;
+    height: 20%;
+    padding-left: 10px;
+    margin-bottom: 30px;
+}
+
+.mb-3 {
+    width: 75%;
+}
+
+.search-table {
+    max-width: 50%;
+}
+
+#input-group-dropdown-1 {
+    width: 25%;
+}
+
+#input-form {
+    width: 75%;
+}
