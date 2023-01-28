@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './components/Home/Home';
 import Search from './components/Search/Search';
 import Results from './components/Results/Results';
-
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import { createContext } from 'react';
@@ -21,6 +20,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 
 const db = firebase.firestore();
+
+// let count = 0  count={count}
 
 export const dbContext = createContext(db);
 

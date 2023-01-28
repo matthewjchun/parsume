@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { dbContext } from '../../App';
+import { CountContext } from '../../context';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,9 +9,12 @@ import './Home.css';
 
 function Home() {
   const [file, setFile] = useState(null)
+  const [ count, setCount ] = useContext(CountContext);
+  const db = useContext(dbContext);
+
   const navigate = useNavigate();
-  const db = useContext(dbContext)
-  var fileCounter = 0
+  // let fileCounter = this.props.count
+
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -36,7 +40,7 @@ function Home() {
   }
 
   const fileParse = async (text) => {
-    fileCounter += 1
+    setCount(count+1)
 
     // These lines do all the string manipulation needed to create our JS object
     const resumeName = (text.split(' ').slice(0, 2).join(' ')).slice(0, text.indexOf("Education")).replace(/(\r\n|\n|\r)/gm, "")
@@ -46,7 +50,7 @@ function Home() {
 
     // Adding all the key-value item pairs to our JS object
     var resumeData = {
-      id: fileCounter,
+      id: count,
       name: resumeName,
       education: resumeEdu,
       skills: resumeSkills,
@@ -54,7 +58,7 @@ function Home() {
     }
 
     // Here we add our document to the proper collection in our database
-    await db.collection("files").doc(`${fileCounter}`).set(resumeData).then(() => {
+    await db.collection("files").doc(`${count}`).set(resumeData).then(() => {
       console.log("Document successfully written!");
     })
       .catch((error) => {
@@ -62,7 +66,7 @@ function Home() {
       });
 
     setTimeout(() => {
-      navigate(`/results/${fileCounter}`);
+      navigate(`/results/${count}`);
     }, 0);
   }
 
