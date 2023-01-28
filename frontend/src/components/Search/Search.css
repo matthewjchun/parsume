@@ -39,10 +39,15 @@
     width: 25%;
     height: 20%;
     padding-left: 10px;
+    margin-bottom: 30px;
 }
 
 .mb-3 {
     width: 75%;
+}
+
+.search-table {
+    max-width: 50%;
 }
 
 #input-group-dropdown-1 {

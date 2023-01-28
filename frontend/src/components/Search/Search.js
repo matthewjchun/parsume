@@ -1,10 +1,9 @@
 import './Search.css';
 import { dbContext } from '../../App';
 import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
 import { Link } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react'
-
-
 
 function Search() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -29,18 +28,33 @@ function Search() {
         </Link>
       </div>
       <div className="search-format">
-        <input className="Search" type="text" placeholder="Search..." onChange={e => { setSearchTerm(e.target.value) }}></input>
-        {data.filter((item) => {
-          if (searchTerm == "") {
-            return item
-          } else if (item.name.toLowerCase().includes(searchTerm.toLowerCase())) {
-            return item
-          }
-        }).slice(0, 10).map(item => (
-          <Link to={`/results/${item.id}`} key={item.id} >
-            {item.name}
-          </Link>
-        ))}
+        <input type="text" placeholder="Search by Applicant Name..." onChange={e => { setSearchTerm(e.target.value) }}></input>
+        <Table className="search-table" striped bordered hover variant="dark">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Applicant Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.filter((item) => {
+              if (searchTerm == "") {
+                return item
+              } else if (item.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+                return item
+              }
+            }).slice(0, 10).map(item => (
+              <tr>
+                <td>{item.id}</td>
+                <td>
+                  <Link to={`/results/${item.id}`} key={item.id} >
+                    {item.name}
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
       </div>
     </div>
   );

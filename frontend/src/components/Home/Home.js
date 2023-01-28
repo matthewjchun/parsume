@@ -11,10 +11,7 @@ function Home() {
   const [file, setFile] = useState(null)
   const [ count, setCount ] = useContext(CountContext);
   const db = useContext(dbContext);
-
   const navigate = useNavigate();
-  // let fileCounter = this.props.count
-
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
