@@ -1,72 +1,72 @@
 import React, { useContext, useState } from 'react'
-import { FirebaseContext } from '../../App';
-// import { FilePond } from 'react-filepond'
-// import 'filepond/dist/filepond.min.css'
+import { dbContext } from '../../App';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom'
 import './Home.css';
-
+// import { setDoc, doc } from 'firebase/firestore';
 
 function Home() {
   const [file, setFile] = useState(null)
-  const firebase = useContext(FirebaseContext)
+  const db = useContext(dbContext)
 
-  const handleFilePondChange = (fileItems) => {
-    // getting the first file in the fileItems array
-    const file = fileItems[0].file;
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
     setFile(file);
   }
 
-  const handleFileParse = () => {
+  const handleFileParse = async () => {
     if (!file) {
       console.log('No file selected');
       return;
     }
 
     const fileReader = new FileReader();
-
-    fileReader.onload = async (e) => {
-      const text = (e.target.result)
-      console.log(text)
-      // console.log(this.result)
-      // const parsedData = JSON.parse(fileReader.result)
-      // console.log(parsedData)
-    }
-
-    fileReader.readAsText(file);
-
+    return new Promise((resolve, reject) => {
+      fileReader.onload = (e) => {
+        resolve(e.target.result);
+        const text = (e.target.result);
+        fileParse(text);
+        // setText(text);
+      }
+      fileReader.onerror = reject;
+      fileReader.readAsText(file);
+    })
   }
 
-  // const handleUpload = (file) => {
-  //   const storageRef = firebase.storage().ref();
-  //   const fileRef = storageRef.child(file.name);
-  //   fileRef.put(file.file).then(() => {
-  //     console.log("File has been uploaded")
-  //   })
-  // }             
+  const fileParse = async (text) => {
+    // These lines do all the string manipulation needed to create our JS object
+    const resumeName = (text.split(' ').slice(0, 2).join(' ')).slice(0, text.indexOf("Education")).replace(/(\r\n|\n|\r)/gm, "")
+    const resumeEdu = text.slice(text.indexOf("Education") + 10, text.indexOf("Skills") - 1).replace(/(\r\n|\n|\r)/gm, "")
+    const resumeSkills = text.slice(text.indexOf("Skills") + 7, text.indexOf("Experience") - 1).replace(/(\r\n|\n|\r)/gm, "").split(", ")
+    const resumeExp = text.slice(text.indexOf("Experience") + 11).replace(/(\r\n|\n|\r)/gm, "")
 
-  // onprocessfile={(error, file) => handleUpload(file)}
+    // Adding all the key-value item pairs to our JS object
+    var resumeData = {
+      name: resumeName,
+      education: resumeEdu,
+      skills: resumeSkills,
+      experience: resumeExp
+    }
 
+    // Here we add our document to the proper collection in our database
+    db.collection("files").add(resumeData).then(() => {
+      console.log("Document successfully written!");
+    })
+      .catch((error) => {
+        console.error("Error writing document: ", error);
+      });
+  }
 
   return (
     <div className="format">
       <h className="logo">
         PARSUME
       </h>
-      {/* <FilePond
-              files={file}
-              onupdatefiles={handleFilePondChange}
-              allowMultiple={false}
-              maxFiles={1}
-              name="file"
-              labelIdle='Drag & Drop your Resume or <span class="filepond--label-action">Browse</span>'
-          /> */}
-      {/* <input type="file"></input> */}
       <div>
-        <Form.Group controlId="formFileLg" className="file-upload">
-          <Form.Control type="file" size="lg" />
+        <Form.Group controlId="formFileLg" className="file-upload" >
+          <Form.Control type="file" size="lg" onChange={handleFileChange} />
         </Form.Group>
         {
           file ?

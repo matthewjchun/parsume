@@ -7,10 +7,7 @@ import Results from './components/Results/Results';
 
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
-import 'firebase/compat/storage';
-import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { createContext } from 'react';
-import { create } from 'filepond';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBI21VQ4eW-qwVlUpJ-3x8nBUvsAhRuf1g",
@@ -23,9 +20,9 @@ const firebaseConfig = {
 }
 firebase.initializeApp(firebaseConfig)
 
-const firestore = firebase.firestore();
+const db = firebase.firestore();
 
-export const FirebaseContext = createContext(firebase);
+export const dbContext = createContext(db);
 
 function App() {
   return (
