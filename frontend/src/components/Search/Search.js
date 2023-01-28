@@ -45,7 +45,7 @@ function Search() {
               }
             }).slice(0, 10).map(item => (
               <tr>
-                <td>{item.id}</td>
+                <td>{item.id+1}</td>
                 <td>
                   <Link to={`/results/${item.id}`} key={item.id} >
                     {item.name}

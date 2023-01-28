@@ -21,8 +21,6 @@ firebase.initializeApp(firebaseConfig)
 
 const db = firebase.firestore();
 
-// let count = 0  count={count}
-
 export const dbContext = createContext(db);
 
 function App() {
